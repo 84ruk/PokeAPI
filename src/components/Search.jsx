@@ -4,12 +4,32 @@ export const Search = () => {
 
     const { handleInputChange, handleSubmit, inputArea, showAutoComplete } = usePokemon();
 
+/*     const autocomplete = createAutcomplete({
+      onStateChange: ({ state }) => setAutoCompleteState(state),
+      getSource: () => [{
+        sourceId: 'pokemon',
+        getItems: ({ query }) => {
+          if (!!query) {
+            return fetch(`https://pokeapi.co/api/v2/pokemon/?limit=10&offset=0&name=${query}`)
+              .then(res => res.json())
+              .then(data => data.results)
+              .then(results => results.map(result => ({
+                label: result.name,
+                value: result.name,
+                url: result.url
+              })))
+          } else {
+            return []
+          }
+        }
+      }]
+    }) */
 
   return (
         <form 
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit} 
+          className="flex self-center relative text-gray-600 focus-within:text-gray-400"
         >
-            <div className="flex relative text-gray-600 focus-within:text-gray-400">
                       <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                       <button type="submit" className="p-1 focus:outline-none focus:shadow-outline">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -20,13 +40,12 @@ export const Search = () => {
                 <input 
                     onChange={handleInputChange}
                     type="search" 
-                    className="py-2 h-10 text-sm bg-gray-100 rounded-full px-4 border-none focus:outline-none placeholder:text-gray-500 pl-10 focus:bg-gray-200 focus:text-gray-900" placeholder="Busca un Pokemon..." 
+                    className="py-2 h-10 text-sm bg-gray-100 rounded-full px-4 border-none focus:outline-none placeholder:text-gray-500 pl-10 focus:bg-gray-200 focus:text-gray-900 w-full md:w-96" placeholder="Busca un Pokemon..." 
                     autoComplete="off"
                     name='name'
                     ref={inputArea}
                 />
                 { showAutoComplete && <div className="absolute inset-y-0 right-0 flex items-center pr-2">dasmasnd</div>}
-            </div>
         </form>
   )
 }

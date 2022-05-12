@@ -10,20 +10,20 @@ const PokemonProvider = ({ children }) => {
 
 
     const [filtroActual, setFiltroActual] = useState('Todos');
-    const [pokemon, setPokemon] = useState([]);
+    const [pokemon, setPokemon] = useState([]);  //Estado que trae los datos especificos de la API
     const [busqueda, setBusqueda] = useState('');
     const [error, setError] = useState(false); //Anadir modal o componente que se mueste si es true
-    const [cargando, setCargando] = useState(false); //Anadir modal o componente que se mueste si es true
     const [alerta, setAlerta] = useState(''); //Anadir modal o componente que se mueste si es true
+    const [cargando, setCargando] = useState(false); //Anadir modal o componente que se mueste si es true
     const [paginaActual, setPaginaActual] = useState(0);
-
+    const [hasMore, setHasMore] = useState(true);
 
 
 
      const getInitialPokemons = async () => {
 
         const resp = await axios
-        .get(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${paginaActual}`)
+        .get('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
         .then((data) => {
           return data.data.results;
         })
@@ -39,15 +39,44 @@ const PokemonProvider = ({ children }) => {
 
     }
 
+const getMorePokemons = async () => {
+        
+        if(paginaActual >= 20 && paginaActual <= 1120) {
+            const resp = await axios
+            .get(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${paginaActual}`)
+            .then((data) => {
+            return data.data.results;
+            })
+            .then((data) => {
+            return Promise.all(data.map((res) => 
+                axios.get(res.url))); // ENTRAR A CADA ELEMENTO Y HACERLE UN GET A SU URL
+            })
+            .then((data) => {
+            return data.map((res) => res.data); // RESULTADO FINAL DE CADA POKEMON CON TODOS SUS DATOS, SE GUARDAN EN RESP.
+    
+            });
+            setPokemon(prevPokemon => prevPokemon.concat(resp));
+        } else if(paginaActual >= 1120){
+            setHasMore(false);
+        }else {
+            return;
+        }
+
+    } 
+
+
+
 
     useEffect(() => {
         getInitialPokemons();
-    }, [paginaActual]);
+    }, []);
 
+    useEffect(() => {
+        getMorePokemons();
+    }, [paginaActual]); 
+
+  
     const handleInputChange = (e) => {
-
-
-
         setBusqueda({
             ...busqueda,
             [ e.target.name ]: e.target.value
@@ -57,11 +86,6 @@ const PokemonProvider = ({ children }) => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
-
-        if(Object.values(busqueda).includes('')){ /// Si uno de los campos esta vacio seteara la alerta y si pasa el condicional no hara nada
-            setAlerta('Todos los campos son obligatorios');
-            return;
-        }
         getPokemonByName(busqueda);
         setFiltroActual(busqueda.name);
 
@@ -76,12 +100,14 @@ const PokemonProvider = ({ children }) => {
             const respname = await axios    // SE BUSCA EL POKEMON POR NOMBRE
             .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
             .then((data) => {
-            return setPokemon([data.data]); 
+            setPokemon([data.data]);
+            setHasMore(false);
         });
 
         } catch (error) {
             setError(true);
-            setPokemon([]);
+            setAlerta('Ese Pokemon no existe :(');
+            setHasMore(false);
         }
         setCargando(false);
 
@@ -99,6 +125,10 @@ const PokemonProvider = ({ children }) => {
             busqueda,
             setPaginaActual,
             paginaActual,
+            error,
+            alerta,
+            getInitialPokemons,
+            hasMore,
         }}
         >
         {children}
