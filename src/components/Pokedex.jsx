@@ -25,7 +25,7 @@ export const Pokedex = () => {
             next={ () => {
               setPaginaActual(prevPag => prevPag + 20)
             } }
-            className="flex flex-wrap justify-center w-auto h-auto"
+            className="flex flex-wrap justify-center w-full"
           >
             <h1 className=" text-3xl font-semibold text-center my-3 w-full overscroll-contain">{filtroActual == 'Todos' ? null : 'Pokedex -'} {filtroActual}</h1>
 

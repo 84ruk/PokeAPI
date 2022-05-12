@@ -4,27 +4,6 @@ export const Search = () => {
 
     const { handleInputChange, handleSubmit, inputArea, showAutoComplete } = usePokemon();
 
-/*     const autocomplete = createAutcomplete({
-      onStateChange: ({ state }) => setAutoCompleteState(state),
-      getSource: () => [{
-        sourceId: 'pokemon',
-        getItems: ({ query }) => {
-          if (!!query) {
-            return fetch(`https://pokeapi.co/api/v2/pokemon/?limit=10&offset=0&name=${query}`)
-              .then(res => res.json())
-              .then(data => data.results)
-              .then(results => results.map(result => ({
-                label: result.name,
-                value: result.name,
-                url: result.url
-              })))
-          } else {
-            return []
-          }
-        }
-      }]
-    }) */
-
   return (
         <form 
           onSubmit={handleSubmit} 
@@ -38,14 +17,15 @@ export const Search = () => {
                     </button>
                 </span>
                 <input 
-                    onChange={handleInputChange}
+                    onChange={
+                      handleInputChange
+                    }
                     type="search" 
                     className="py-2 h-10 text-sm bg-gray-100 rounded-full px-4 border-none focus:outline-none placeholder:text-gray-500 pl-10 focus:bg-gray-200 focus:text-gray-900 w-full md:w-96" placeholder="Busca un Pokemon..." 
                     autoComplete="off"
                     name='name'
                     ref={inputArea}
                 />
-                { showAutoComplete && <div className="absolute inset-y-0 right-0 flex items-center pr-2">dasmasnd</div>}
         </form>
   )
 }
