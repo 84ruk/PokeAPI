@@ -9,12 +9,12 @@ const PokemonContext = createContext();
 const PokemonProvider = ({ children }) => {
 
 
-    const [filtroActual, setFiltroActual] = useState('Todos');
+    const [filtroActual, setFiltroActual] = useState('Pokedex');
     const [pokemon, setPokemon] = useState([]);  //Estado que trae los datos especificos de la API
     const [busqueda, setBusqueda] = useState('');
     const [error, setError] = useState(false); //Anadir modal o componente que se mueste si es true
     const [alerta, setAlerta] = useState(''); //Anadir modal o componente que se mueste si es true
-    const [cargando, setCargando] = useState(false); //Anadir modal o componente que se mueste si es true
+    const [cargando, setCargando] = useState(true); //Anadir modal o componente que se mueste si es true
     const [paginaActual, setPaginaActual] = useState(0);
     const [hasMore, setHasMore] = useState(true);
 
@@ -36,7 +36,7 @@ const PokemonProvider = ({ children }) => {
   
         });
         setPokemon(resp);
-
+        setCargando(false);
     }
 
 const getMorePokemons = async () => {
@@ -68,7 +68,9 @@ const getMorePokemons = async () => {
 
 
     useEffect(() => {
-        getInitialPokemons();
+        setTimeout(() => {
+            getInitialPokemons();
+        }, 700);
     }, []);
 
     useEffect(() => {
@@ -77,37 +79,45 @@ const getMorePokemons = async () => {
 
   
     const handleInputChange = (e) => {
-        setBusqueda({
-            ...busqueda,
-            [ e.target.name ]: e.target.value
-        });
+        setBusqueda(
+            e.target.value
+        );
+        
     }
     
     const handleSubmit = (e) => {
 
-        e.preventDefault();
-        getPokemonByName(busqueda);
-        setFiltroActual(busqueda.name);
+        if(busqueda === '') {
+            return;
+        }
 
+        e.preventDefault();
+        setError(false);
+        setAlerta('');
+        getPokemonByName(busqueda);
+        setFiltroActual(busqueda);
+        
 
     }
 
     const getPokemonByName = async (busqueda) => {
 
         setCargando(true);
-        const { name } = busqueda;
         try {
             const respname = await axios    // SE BUSCA EL POKEMON POR NOMBRE
-            .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+            .get(`https://pokeapi.co/api/v2/pokemon/${busqueda}`)
             .then((data) => {
             setPokemon([data.data]);
+            setError(false);
             setHasMore(false);
+            setAlerta('');
         });
 
         } catch (error) {
             setError(true);
             setAlerta('Ese Pokemon no existe :(');
             setHasMore(false);
+            setPokemon([]);
         }
         setCargando(false);
 
@@ -116,6 +126,7 @@ const getMorePokemons = async () => {
     return (
         <PokemonContext.Provider
         value={{
+            setBusqueda,
             handleInputChange,
             setPokemon,
             pokemon,
@@ -126,9 +137,13 @@ const getMorePokemons = async () => {
             setPaginaActual,
             paginaActual,
             error,
+            setError,
             alerta,
+            setAlerta,
             getInitialPokemons,
             hasMore,
+            cargando,
+            setHasMore,
         }}
         >
         {children}

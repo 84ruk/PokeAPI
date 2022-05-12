@@ -8,14 +8,18 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 export const Pokedex = () => {
 
-  const { pokemon, busqueda, filtroActual, error, setPaginaActual, paginaActual, hasMore } = usePokemon();
+  const { pokemon, busqueda, filtroActual, error, setPaginaActual, paginaActual, hasMore, cargando } = usePokemon();
 
   return (
-    <div className="px-10 flex flex-col max-w-screen-2xl mx-auto w-full">
+    <>
 
       
 
-        {error ? 
+        {cargando ? 
+        <Spinner 
+
+        /> :
+         error ? 
           <Error />
           : 
           <InfiniteScroll
@@ -25,9 +29,9 @@ export const Pokedex = () => {
             next={ () => {
               setPaginaActual(prevPag => prevPag + 20)
             } }
-            className="flex flex-wrap justify-center w-full"
+            className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto"
           >
-            <h1 className=" text-3xl font-semibold text-center my-3 w-full overscroll-contain">{filtroActual == 'Todos' ? null : 'Pokedex -'} {filtroActual}</h1>
+            <h1 className=" text-3xl font-semibold text-center my-3 w-full overscroll-contain">{filtroActual == 'Pokedex' ? null : 'Pokedex -'} {filtroActual}</h1>
 
             {pokemon.map(pokemon => {
               return (
@@ -40,6 +44,6 @@ export const Pokedex = () => {
           </InfiniteScroll>
         }  
 
-    </div>
+    </>
   )
 }

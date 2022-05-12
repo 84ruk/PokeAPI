@@ -2,7 +2,7 @@ import usePokemon from '../hooks/usePokemon';
 
 export const Search = () => {
 
-    const { handleInputChange, handleSubmit, inputArea, showAutoComplete } = usePokemon();
+    const { handleInputChange, handleSubmit, busqueda } = usePokemon();
 
   return (
         <form 
@@ -17,14 +17,14 @@ export const Search = () => {
                     </button>
                 </span>
                 <input 
+                    type="text"
+                    value={busqueda}
                     onChange={
                       handleInputChange
                     }
-                    type="search" 
                     className="py-2 h-10 text-sm bg-gray-100 rounded-full px-4 border-none focus:outline-none placeholder:text-gray-500 pl-10 focus:bg-gray-200 focus:text-gray-900 w-full md:w-96" placeholder="Busca un Pokemon..." 
                     autoComplete="off"
                     name='name'
-                    ref={inputArea}
                 />
         </form>
   )
