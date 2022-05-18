@@ -11,12 +11,16 @@ export const PokemonByType = () => {
 
   const { type } = useParams();
 
-  const { error, getPokemonByType, busqueda, pokemon, cargando, filtroActual} = usePokemon();
+  const { error, getPokemonByType, pokemon, cargando, filtroActual, setCargando} = usePokemon();
 
    useEffect(() => {
     getPokemonByType(type);
   }, [])  
-  
+
+  console.log('type ' + type);
+  console.log(pokemon);
+
+
 //Error si abro en otra pestana el filtro y otro error es que guarada los pokmones del filltro anterior
   return (
     <div>
@@ -27,6 +31,7 @@ export const PokemonByType = () => {
       dataLength={pokemon.length}
       loader={<Spinner/>}
       className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto"
+      hasMore={false}
     >
       <h1 className="text-3xl font-semibold text-center my-3 w-full overscroll-contain">{filtroActual == 'Pokedex' ? null : 'Pokedex -'} {filtroActual}</h1>
 
@@ -40,8 +45,6 @@ export const PokemonByType = () => {
 
     </InfiniteScroll>
       }
-
-      
     </div>
   )
 }

@@ -39,7 +39,7 @@ const PokemonProvider = ({ children }) => {
         setCargando(false);
     }
 
-    const getPokemonByType = async (busqueda) => {
+    const getPokemonByType = async (type) => {
 
         setCargando(true);
         setError(false);
@@ -47,7 +47,7 @@ const PokemonProvider = ({ children }) => {
         setPaginaActual(0);
         setPokemon([]);
             const respname = await axios    // SE BUSCA EL POKEMON POR NOMBRE
-            .get(`https://pokeapi.co/api/v2/type/${busqueda}`)
+            .get(`https://pokeapi.co/api/v2/type/${type}`)
             .then(data => {
                 return data.data.pokemon;
             });

@@ -1,11 +1,11 @@
-import { useParams, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toUpperCase } from "../helpers";
 import usePokemon from "../hooks/usePokemon";
 
 
 export const Pokemon = ({ pokemon }) => {
 
-  const { setFiltroActual, getPokemonByType, setBusqueda } = usePokemon();
+  const { getPokemonByType } = usePokemon();
 
     const colorConfig = {
     // Colors
@@ -87,6 +87,13 @@ export const Pokemon = ({ pokemon }) => {
     },
   };  // End of colorConfig
 
+  const navigate = useNavigate();
+
+  const handleClick = (type) => {
+    navigate(`/filters/${type}`);
+    getPokemonByType(type);
+  };
+
   return (
       <div className="w-full flex flex-wrap drop-shadow-md justify-center p-4 md:w-auto">
         <div className="flex flex-col w-60 h-auto  rounded bg-white">
@@ -104,14 +111,11 @@ export const Pokemon = ({ pokemon }) => {
                 <p className="mb-2"> Tipo: </p>
                 {pokemon.types.map(type => {
                     return(
-                        <Link to={`filters/${type.type.name}`} key={type.type.name} 
-                        onClick={() => {
-                          setBusqueda(`type/${type.type.name}`);
-                        }}
+                        <button onClick={() => handleClick(type.type.name)} key={type.type.name} 
                         className={`inline-block rounded-md px-2 py-1 text-sm font-semibold text-white mr-2 hover:cursor-pointer hover:scale-110 ease-in duration-200 ${colorConfig[type.type.name].typeColor}` }
                         >
                             {toUpperCase(type.type.name)}
-                        </Link>
+                        </button>
                     )
                 }
                 )}

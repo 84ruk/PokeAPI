@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Header } from './components/Header';
 import { Pokedex } from './components/Pokedex';
 import { PokemonByType } from './components/PokemonByType';
@@ -12,8 +12,9 @@ function App() {
       <Routes>
 
           <Route path='/' index element={<Pokedex />}/>
-          <Route path='*' element={<Pokedex />}/>
+          <Route path='*' element={<Error />}/>
           <Route path='/filters/:type' element={<PokemonByType />}/>
+          <Route path='/filters/:type' element={<Navigate to='/'/>}/>
 
       </Routes>
     </PokemonProvider>

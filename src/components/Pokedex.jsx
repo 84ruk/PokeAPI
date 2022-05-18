@@ -12,7 +12,7 @@ export const Pokedex = () => {
   return (
     <>
 
-      
+      {console.log('nono')}
 
         {cargando ? 
         <Spinner 
