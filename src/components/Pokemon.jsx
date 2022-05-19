@@ -91,8 +91,8 @@ export const Pokemon = ({ pokemon }) => {
   const navigate = useNavigate();
 
   const handleClick = (type) => {
-    navigate(`/filters/${type}`);
     getPokemonByType(type);
+    navigate(`/filters/${type}`);
   };
 
   return (

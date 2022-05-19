@@ -11,11 +11,7 @@ export const PokemonByType = () => {
 
   const { type } = useParams();
 
-  const { error, getPokemonByType, pokemon, cargando, filtroActual} = usePokemon();
-
-   useEffect(() => {
-    getPokemonByType(type);
-  }, [])  
+  const { error, pokemon, cargando, filtroActual} = usePokemon(); 
 
   console.log('Filtro: ' + type)
 
