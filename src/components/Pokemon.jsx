@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { toUpperCase } from "../helpers";
+import { colorConfig } from "../helpers/typesConfig";
 import usePokemon from "../hooks/usePokemon";
 
 

@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 export const Error = () => { 
 
-  const { error, alerta } = usePokemon();
+  const { alerta  } = usePokemon();
 
   return (
     <div className="mt-10 w-10/12 h-56 shadow flex flex-col items-center rounded-b-lg mx-auto max-w-6xl">

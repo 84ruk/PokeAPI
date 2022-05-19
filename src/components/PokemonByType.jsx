@@ -11,17 +11,14 @@ export const PokemonByType = () => {
 
   const { type } = useParams();
 
-  const { error, getPokemonByType, pokemon, cargando, filtroActual, setCargando} = usePokemon();
+  const { error, getPokemonByType, pokemon, cargando, filtroActual} = usePokemon();
 
    useEffect(() => {
     getPokemonByType(type);
   }, [])  
 
-  console.log('type ' + type);
-  console.log(pokemon);
+  console.log('Filtro: ' + type)
 
-
-//Error si abro en otra pestana el filtro y otro error es que guarada los pokmones del filltro anterior
   return (
     <div>
       {error ? <Error /> 

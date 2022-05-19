@@ -3,17 +3,21 @@ import { Error } from "./Error";
 import { Pokemon } from "./Pokemon";
 import { Spinner } from './Spinner';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useEffect } from 'react';
 
 
 export const Pokedex = () => {
 
-  const { pokemon, busqueda, filtroActual, error, setPaginaActual, paginaActual, hasMore, cargando } = usePokemon();
+  const { cargando, error, filtroActual, getInitialPokemons, hasMore, pokemon, setPaginaActual } = usePokemon();
+
+  useEffect(() => {
+    setTimeout(() => {
+        getInitialPokemons();
+    }, 700);
+}, []);
 
   return (
     <>
-
-      {console.log('nono')}
-
         {cargando ? 
         <Spinner 
 

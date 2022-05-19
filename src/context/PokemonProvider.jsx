@@ -54,7 +54,7 @@ const PokemonProvider = ({ children }) => {
             const respurl = await Promise.all(respname.map(res => axios.get(res.pokemon.url))); // SE BUSCA EL POKEMON POR URL
             const resp = await Promise.all(respurl.map(res => res.data)); // SE BUSCA EL POKEMON POR URL
             setPokemon(resp);
-        setCargando(false);
+            setCargando(false);
 
     }
 
@@ -82,15 +82,6 @@ const PokemonProvider = ({ children }) => {
         }
 
     } 
-
-    
-
-
-    useEffect(() => {
-        setTimeout(() => {
-            getInitialPokemons();
-        }, 700);
-    }, []);
 
     useEffect(() => {
         getMorePokemons();
