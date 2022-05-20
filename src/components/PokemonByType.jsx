@@ -10,21 +10,25 @@ export const PokemonByType = () => {
 
   const { type } = useParams();
 
-  const { error, pokemon, cargando, filtroActual} = usePokemon(); 
+  const { cargando, error, filtroActual, getPokemonByType, pokemon} = usePokemon(); 
 
-  console.log('Filtro: ' + type)
+  useEffect(() => {
+    getPokemonByType(type);
+  }, [])
+  
 
   return (
     <div>
       {error ? <Error /> 
       : cargando ? <Spinner />
       :
-        <div>
+        <div className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto">
           <h1 className="text-3xl font-semibold text-center my-3 w-full overscroll-contain">{filtroActual == 'Pokedex' ? null : 'Pokedex -'} {filtroActual}</h1>
           {pokemon.map(pokemon => (
             <Pokemon 
               key={pokemon.id} 
               pokemon={pokemon} 
+              type={type}
             />
           ))}
         </div>
