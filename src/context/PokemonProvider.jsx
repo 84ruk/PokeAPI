@@ -9,7 +9,6 @@ const PokemonContext = createContext();
 const PokemonProvider = ({ children }) => {
 
 
-    const [filtroActual, setFiltroActual] = useState('Pokedex');
     const [pokemon, setPokemon] = useState([]);  //Estado que trae los datos especificos de la API
     const [busqueda, setBusqueda] = useState('');
     const [error, setError] = useState(false); //Anadir modal o componente que se mueste si es true
@@ -39,25 +38,6 @@ const PokemonProvider = ({ children }) => {
         setCargando(false);
     }
 
-    const getPokemonByType = async (type) => {
-
-        setCargando(true);
-        setError(false);
-        setAlerta('');
-        setPaginaActual(0);
-        setPokemon([]);
-            const respname = await axios    // SE BUSCA EL POKEMON POR NOMBRE
-            .get(`https://pokeapi.co/api/v2/type/${type}`)
-            .then(data => {
-                return data.data.pokemon;
-            });
-            const respurl = await Promise.all(respname.map(res => axios.get(res.pokemon.url))); // SE BUSCA EL POKEMON POR URL
-            const resp = await Promise.all(respurl.map(res => res.data)); // SE BUSCA EL POKEMON POR URL
-            setPokemon(resp);
-            setCargando(false);
-
-    }
-
     const getMorePokemons = async () => {
         
         if(paginaActual >= 20 && paginaActual <= 1120) {
@@ -82,6 +62,27 @@ const PokemonProvider = ({ children }) => {
         }
 
     } 
+
+    const getPokemonByType = async (type) => {
+
+        setCargando(true);
+        setError(false);
+        setAlerta('');
+        setPaginaActual(0);
+        setPokemon([]);
+            const respname = await axios    // SE BUSCA EL POKEMON POR NOMBRE
+            .get(`https://pokeapi.co/api/v2/type/${type}`)
+            .then(data => {
+                return data.data.pokemon;
+            });
+            const respurl = await Promise.all(respname.map(res => axios.get(res.pokemon.url))); // SE BUSCA EL POKEMON POR URL
+            const resp = await Promise.all(respurl.map(res => res.data)); // SE BUSCA EL POKEMON POR URL
+            setPokemon(resp);
+            setCargando(false);
+
+    }
+
+
 
     useEffect(() => {
         getMorePokemons();
@@ -141,8 +142,6 @@ const PokemonProvider = ({ children }) => {
             setPokemon,
             pokemon,
             handleSubmit,
-            filtroActual,
-            setFiltroActual,
             busqueda,
             setPaginaActual,
             paginaActual,

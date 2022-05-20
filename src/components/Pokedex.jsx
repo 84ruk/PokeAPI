@@ -1,14 +1,16 @@
+import { useEffect } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import usePokemon from '../hooks/usePokemon';
 import { Error } from "./Error";
 import { Pokemon } from "./Pokemon";
 import { Spinner } from './Spinner';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { useEffect } from 'react';
+
 
 
 export const Pokedex = () => {
 
-  const { cargando, error, filtroActual, getInitialPokemons, hasMore, pokemon, setPaginaActual } = usePokemon();
+  const { cargando, error, getInitialPokemons, hasMore, pokemon, setPaginaActual } = usePokemon();
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,7 +36,7 @@ export const Pokedex = () => {
             } }
             className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto"
           >
-            <h1 className="text-3xl font-semibold text-center my-3 w-full overscroll-contain">{filtroActual == 'Pokedex' ? null : 'Pokedex -'} {filtroActual}</h1>
+            <h1 className="text-3xl font-semibold text-center my-3 w-full overscroll-contain">Pokedex</h1>
 
             {pokemon.map(pokemon => {
               return (

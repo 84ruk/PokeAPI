@@ -91,7 +91,6 @@ export const Pokemon = ({ pokemon }) => {
   const navigate = useNavigate();
 
   const handleClick = (type) => {
-    getPokemonByType(type);
     navigate(`/filters/${type}`);
   };
 
@@ -105,7 +104,7 @@ export const Pokemon = ({ pokemon }) => {
                     className="h-24 w-auto m-auto"
                 />
             </div>
-            <h2 className='font-semibold text-2xl h-1/4 antialiased m-auto'>
+            <h2 className='font-semibold text-2xl h-1/4 antialiased m-auto hover:cursor-pointer'>
                 {toUpperCase(pokemon.name)}
             </h2>
             <div className="p-5 h-auto">

@@ -2,20 +2,20 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import usePokemon from "../hooks/usePokemon";
 import { Pokemon } from "./Pokemon";
-import { toUpperCase } from "../helpers";
 import { Error } from "./Error";
 import { Spinner } from "./Spinner";
+import { toUpperCase } from "../helpers";
+
 
 export const PokemonByType = () => {
 
   const { type } = useParams();
 
-  const { cargando, error, filtroActual, getPokemonByType, pokemon} = usePokemon(); 
+  const { cargando, error, getPokemonByType, pokemon} = usePokemon(); 
 
-  useEffect(() => {
+   useEffect(() => {
     getPokemonByType(type);
-  }, [])
-  
+  }, [type])
 
   return (
     <div>
@@ -23,7 +23,7 @@ export const PokemonByType = () => {
       : cargando ? <Spinner />
       :
         <div className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto">
-          <h1 className="text-3xl font-semibold text-center my-3 w-full overscroll-contain">{filtroActual == 'Pokedex' ? null : 'Pokedex -'} {filtroActual}</h1>
+          <h1 className="text-3xl font-semibold text-center my-3 w-full overscroll-contain">{type == 'Pokedex' ? 'null' : 'Pokedex -'} {toUpperCase(type)}</h1>
           {pokemon.map(pokemon => (
             <Pokemon 
               key={pokemon.id} 
