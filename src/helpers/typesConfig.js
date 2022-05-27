@@ -1,4 +1,4 @@
-export const colorConfig = {
+export const typesConfig = {
     // Colors
     normal: {
       bgColor: 'to-neutral-500',

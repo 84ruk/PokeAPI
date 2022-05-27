@@ -8,46 +8,49 @@ import { Spinner } from './Spinner';
 
 
 export const Pokedex = () => {
-
-  const { cargando, error, getInitialPokemons, hasMore, pokemon, setPaginaActual } = usePokemon();
-
+  
+  const { cargando, error, getInitialPokemons, hasMore, pokemon, setPaginaActual, setCargando, setHasMore, setPokemon } = usePokemon();
 
   useEffect(() => {
+    setPokemon([]);
+    setCargando(true);
     setTimeout(() => {
-        getInitialPokemons();
-    }, 700);
+      getInitialPokemons();
+      setCargando(false);
+    }, 900);
+    setHasMore(true);
+
 }, []);
 
   return (
     <>
-        {cargando ? 
-        <Spinner 
-
-        /> :
+        {pokemon.length > 2 ? cargando ? 
+          <Spinner/> :
          error ? 
           <Error />
           : 
-          <InfiniteScroll
-            dataLength={pokemon.length}
-            hasMore={hasMore}
-            loader={<Spinner/>}
-            next={ () => {
-              setPaginaActual(prevPag => prevPag + 20)
-            } }
-            className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto"
-          >
+          <>
             <h1 className="text-3xl font-semibold text-center my-3 w-full overscroll-contain">Pokedex</h1>
+            <InfiniteScroll
+              dataLength={pokemon.length}
+              hasMore={hasMore}
+              loader={<Spinner/>}
+              next={ () => {
+                setPaginaActual(prevPag => prevPag + 20)
+              } }
+              className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto overflow-hidden"
+            >
 
-            {pokemon.map(pokemon => {
-              return (
-                  <Pokemon 
-                    pokemon={pokemon}
-                    key={pokemon.name} 
-                  />
-            )})}
-
-          </InfiniteScroll>
-        }  
+              {pokemon.map(pokemon => {
+                return (
+                    <Pokemon 
+                      pokemon={pokemon}
+                      key={pokemon.name} 
+                    />
+                    )})}
+              </InfiniteScroll>
+            </>
+            : <Spinner />}  
 
     </>
   )

@@ -1,69 +1,70 @@
-import { Link, useNavigate } from "react-router-dom";
+import { memo } from "react";
 import { toUpperCase } from "../helpers";
-import { colorConfig } from "../helpers/typesConfig";
 import usePokemon from "../hooks/usePokemon";
+/* import { typesConfig } from "../helpers/typesConfig";
+ */
 
+export const Pokemon = memo(({ pokemon }) => {
+  
 
-export const Pokemon = ({ pokemon }) => {
+  const { handleClickType, handleClickName } = usePokemon();
 
-  const { getPokemonByType } = usePokemon();
-
-    const colorConfig = {
+ const typesConfig = {
     // Colors
     normal: {
       bgColor: 'to-neutral-500',
       typeColor: 'bg-neutral-500',
     },
     grass: {
-      bgColor: 'to-green-500',
-      typeColor: 'bg-green-500',
+      bgColor: 'to-green-300',
+      typeColor: 'bg-green-400',
     },
     poison: {
-      bgColor: 'to-lime-800',
-      typeColor: 'bg-lime-800',
+      bgColor: 'to-lime-600',
+      typeColor: 'bg-lime-600',
     },
     fire: {
-      bgColor: 'to-amber-500',
-      typeColor: 'bg-amber-500'
+      bgColor: 'to-amber-400',
+      typeColor: 'bg-amber-400'
     },
     flying: {
       bgColor: 'to-blue-400',
       typeColor: 'bg-blue-400',
     },
     water: {
-      bgColor: 'to-blue-500',
-      typeColor: 'bg-blue-500',
+      bgColor: 'to-blue-300',
+      typeColor: 'bg-blue-400',
     },
     bug: {
-      bgColor: 'to-neutral-700',
-      typeColor: 'bg-neutral-700',
+      bgColor: 'to-neutral-500',
+      typeColor: 'bg-neutral-500',
     },
     ground: {
-      bgColor: 'to-stone-800',
-      typeColor: 'bg-stone-800',
+      bgColor: 'to-stone-500',
+      typeColor: 'bg-stone-500',
     },
     electric: {
-      bgColor: 'to-neutral-800', //Error con clases tailwind
-      typeColor: 'bg-neutral-800',
+      bgColor: 'to-amber-400', 
+      typeColor: 'bg-amber-400',
     },
     fairy: {
-      bgColor: 'to-pink-600',
-      typeColor: 'bg-pink-600',
+      bgColor: 'to-pink-300',
+      typeColor: 'bg-pink-400',
     },
     fighting: {
-      bgColor: 'to-neutral-600',
-      typeColor: 'bg-neutral-600',
+      bgColor: 'to-neutral-400',
+      typeColor: 'bg-neutral-500',
     },
     psychic: {
-      bgColor: 'to-amber-600',
-      typeColor: 'bg-amber-600',
+      bgColor: 'to-amber-300',
+      typeColor: 'bg-amber-500',
     },
     rock: {
-      bgColor: 'to-stone-600',
+      bgColor: 'to-stone-400',
       typeColor: 'bg-stone-600',
     },
     steel: {
-      bgColor: 'to-stone-500',
+      bgColor: 'to-stone-400',
       typeColor: 'bg-stone-500',
     },
     ice: {
@@ -79,7 +80,7 @@ export const Pokemon = ({ pokemon }) => {
       typeColor: 'bg-orange-400',
     },
     dark: {
-      bgColor: 'to-neutral-800',
+      bgColor: 'to-neutral-500',
       typeColor: 'bg-neutral-800',
     },
     unknow: {
@@ -88,31 +89,25 @@ export const Pokemon = ({ pokemon }) => {
     },
   };  // End of colorConfig
 
-  const navigate = useNavigate();
-
-  const handleClick = (type) => {
-    navigate(`/filters/${type}`);
-  };
-
   return (
-      <div className="w-full flex flex-wrap drop-shadow-md justify-center p-4 md:w-auto">
-        <div className="flex flex-col w-60 h-auto  rounded bg-white">
-            <div className={`h-2/4 w-full bg-gradient-to-t from-transparent ${colorConfig[pokemon.types[0].type.name].bgColor} flex rounded-md `}>
+      <div className="w-full flex flex-wrap drop-shadow-md justify-center p-4 md:w-auto transition ease-in-out delay-15 duration-300 hover:-translate-y-1 hover:scale-110 ">
+        <div className="flex flex-col w-60 h-auto  rounded bg-white ">
+            <div onClick={() => handleClickName(pokemon.name)} className={`h-2/4 w-full bg-gradient-to-t from-transparent ${typesConfig[pokemon.types[0].type.name].bgColor} flex rounded-md  hover:cursor-pointer`}>
                 <img 
-                    src={pokemon.sprites.front_default} 
+                    src={pokemon.sprites.other.home.front_default} 
                     alt={pokemon.name} 
                     className="h-24 w-auto m-auto"
                 />
             </div>
-            <h2 className='font-semibold text-2xl h-1/4 antialiased m-auto hover:cursor-pointer'>
+            <h2 onClick={() => handleClickName(pokemon.name)} className='font-semibold text-2xl h-1/4 antialiased m-auto  hover:cursor-pointer'>
                 {toUpperCase(pokemon.name)}
             </h2>
             <div className="p-5 h-auto">
                 <p className="mb-2"> Tipo: </p>
                 {pokemon.types.map(type => {
                     return(
-                        <button onClick={() => handleClick(type.type.name)} key={type.type.name} 
-                        className={`inline-block rounded-md px-2 py-1 text-sm font-semibold text-white mr-2 hover:cursor-pointer hover:scale-110 ease-in duration-200 ${colorConfig[type.type.name].typeColor}` }
+                        <button onClick={() => handleClickType(type.type.name)} key={type.type.name} 
+                        className={`inline-block rounded-md px-2 py-1 text-sm font-semibold text-white mr-2 hover:scale-110 ease-in duration-200 ${typesConfig[type.type.name].typeColor}` }
                         >
                             {toUpperCase(type.type.name)}
                         </button>
@@ -125,3 +120,4 @@ export const Pokemon = ({ pokemon }) => {
       </div>
   )
 }
+)

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import usePokemon from "../hooks/usePokemon";
 import { Pokemon } from "./Pokemon";
@@ -11,15 +11,25 @@ export const PokemonByType = () => {
 
   const { type } = useParams();
 
-  const { cargando, error, getPokemonByType, pokemon} = usePokemon(); 
+  const { cargando, setCargando, error, getPokemonByType, pokemon} = usePokemon(); 
 
-   useEffect(() => {
-    getPokemonByType(type);
-  }, [type])
+
+  useEffect(() => {
+    setCargando(true);
+
+    setTimeout(() => {
+      getPokemonByType(type);
+      setCargando(false);
+      
+    }, 900);
+
+
+  }, [type]);
+
 
   return (
     <div>
-      {error ? <Error /> 
+      { pokemon.length > 2 ? error ? <Error /> 
       : cargando ? <Spinner />
       :
         <div className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto">
@@ -30,9 +40,8 @@ export const PokemonByType = () => {
               pokemon={pokemon} 
               type={type}
             />
-          ))}
-        </div>
-      }
+          ))} 
+        </div>: <Spinner />}
 
       </div>
   )
