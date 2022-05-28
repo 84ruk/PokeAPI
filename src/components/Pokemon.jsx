@@ -1,10 +1,3 @@
-<<<<<<< HEAD
- import { toUpperCase } from "../helpers";
-
-export const Pokemon = ({ pokemon }) => {
-
-    const colorConfig = {
-=======
 import { memo } from "react";
 import { toUpperCase } from "../helpers";
 import usePokemon from "../hooks/usePokemon";
@@ -17,26 +10,10 @@ export const Pokemon = memo(({ pokemon }) => {
   const { handleClickType, handleClickName } = usePokemon();
 
  const typesConfig = {
->>>>>>> 5c6e8c13e3476e2112a0b6044b53cb59b3fa09c7
     // Colors
     normal: {
       bgColor: 'to-neutral-500',
       typeColor: 'bg-neutral-500',
-<<<<<<< HEAD
-      
-    },
-    grass: {
-      bgColor: 'to-green-500',
-      typeColor: 'bg-green-500',
-    },
-    poison: {
-      bgColor: 'to-lime-800',
-      typeColor: 'bg-lime-800',
-    },
-    fire: {
-      bgColor: 'to-amber-500',
-      typeColor: 'bg-amber-500'
-=======
     },
     grass: {
       bgColor: 'to-green-300',
@@ -49,48 +26,12 @@ export const Pokemon = memo(({ pokemon }) => {
     fire: {
       bgColor: 'to-amber-400',
       typeColor: 'bg-amber-400'
->>>>>>> 5c6e8c13e3476e2112a0b6044b53cb59b3fa09c7
     },
     flying: {
       bgColor: 'to-blue-400',
       typeColor: 'bg-blue-400',
     },
     water: {
-<<<<<<< HEAD
-      bgColor: 'to-blue-500',
-      typeColor: 'bg-blue-500',
-    },
-    bug: {
-      bgColor: 'to-neutral-700',
-      typeColor: 'bg-neutral-700',
-    },
-    ground: {
-      bgColor: 'to-stone-800',
-      typeColor: 'bg-stone-800',
-    },
-    electric: {
-      bgColor: 'to-neutral-800', //Error con clases tailwind
-      typeColor: 'bg-neutral-800',
-    },
-    fairy: {
-      bgColor: 'to-pink-600',
-      typeColor: 'bg-pink-600',
-    },
-    fighting: {
-      bgColor: 'to-neutral-600',
-      typeColor: 'bg-neutral-600',
-    },
-    psychic: {
-      bgColor: 'to-amber-600',
-      typeColor: 'bg-amber-600',
-    },
-    rock: {
-      bgColor: 'to-stone-600',
-      typeColor: 'bg-stone-600',
-    },
-    steel: {
-      bgColor: 'to-stone-500',
-=======
       bgColor: 'to-blue-300',
       typeColor: 'bg-blue-400',
     },
@@ -124,7 +65,6 @@ export const Pokemon = memo(({ pokemon }) => {
     },
     steel: {
       bgColor: 'to-stone-400',
->>>>>>> 5c6e8c13e3476e2112a0b6044b53cb59b3fa09c7
       typeColor: 'bg-stone-500',
     },
     ice: {
@@ -140,11 +80,7 @@ export const Pokemon = memo(({ pokemon }) => {
       typeColor: 'bg-orange-400',
     },
     dark: {
-<<<<<<< HEAD
-      bgColor: 'to-neutral-800',
-=======
       bgColor: 'to-neutral-500',
->>>>>>> 5c6e8c13e3476e2112a0b6044b53cb59b3fa09c7
       typeColor: 'bg-neutral-800',
     },
     unknow: {
@@ -154,46 +90,27 @@ export const Pokemon = memo(({ pokemon }) => {
   };  // End of colorConfig
 
   return (
-<<<<<<< HEAD
-      <div className="w-full flex flex-wrap drop-shadow-md justify-center p-4 md:w-auto">
-        <div className="flex flex-col w-60 h-auto  rounded bg-white hover:cursor-pointer hover:scale-110 ease-in duration-200">
-            <div className={`h-2/4 w-full bg-gradient-to-t from-transparent ${colorConfig[pokemon.types[0].type.name].bgColor} flex rounded-md `}>
-                <img 
-                    src={pokemon.sprites.front_default} 
-=======
       <div className="w-full flex flex-wrap drop-shadow-md justify-center p-4 md:w-auto transition ease-in-out delay-15 duration-300 hover:-translate-y-1 hover:scale-110 ">
         <div className="flex flex-col w-60 h-auto  rounded bg-white ">
             <div onClick={() => handleClickName(pokemon.name)} className={`h-2/4 w-full bg-gradient-to-t from-transparent ${typesConfig[pokemon.types[0].type.name].bgColor} flex rounded-md  hover:cursor-pointer`}>
                 <img 
                     src={pokemon.sprites.other.home.front_default} 
->>>>>>> 5c6e8c13e3476e2112a0b6044b53cb59b3fa09c7
                     alt={pokemon.name} 
                     className="h-24 w-auto m-auto"
                 />
             </div>
-<<<<<<< HEAD
-            <h2 className='font-semibold text-2xl h-1/4 antialiased m-auto'>
-=======
             <h2 onClick={() => handleClickName(pokemon.name)} className='font-semibold text-2xl h-1/4 antialiased m-auto  hover:cursor-pointer'>
->>>>>>> 5c6e8c13e3476e2112a0b6044b53cb59b3fa09c7
                 {toUpperCase(pokemon.name)}
             </h2>
             <div className="p-5 h-auto">
                 <p className="mb-2"> Tipo: </p>
                 {pokemon.types.map(type => {
                     return(
-<<<<<<< HEAD
-                        <span key={type.type.name} 
-                        className={`inline-block rounded-md px-2 py-1 text-sm font-semibold text-white mr-2 ${colorConfig[type.type.name].typeColor}` }>
-                            {toUpperCase(type.type.name)}
-                        </span>
-=======
                         <button onClick={() => handleClickType(type.type.name)} key={type.type.name} 
                         className={`inline-block rounded-md px-2 py-1 text-sm font-semibold text-white mr-2 hover:scale-110 ease-in duration-200 ${typesConfig[type.type.name].typeColor}` }
                         >
                             {toUpperCase(type.type.name)}
                         </button>
->>>>>>> 5c6e8c13e3476e2112a0b6044b53cb59b3fa09c7
                     )
                 }
                 )}
@@ -203,7 +120,4 @@ export const Pokemon = memo(({ pokemon }) => {
       </div>
   )
 }
-<<<<<<< HEAD
-=======
 )
->>>>>>> 5c6e8c13e3476e2112a0b6044b53cb59b3fa09c7

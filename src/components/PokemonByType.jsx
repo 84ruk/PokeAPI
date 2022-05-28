@@ -1,4 +1,4 @@
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import usePokemon from "../hooks/usePokemon";
 import { Pokemon } from "./Pokemon";
