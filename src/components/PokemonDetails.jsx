@@ -26,79 +26,60 @@ export const PokemonDetails = () => {
 const typesConfig = {
   // Colors
   normal: {
-    bgColor: 'to-neutral-500',
     typeColor: 'bg-neutral-500',
   },
   grass: {
-    bgColor: 'to-green-300',
     typeColor: 'bg-green-400',
   },
   poison: {
-    bgColor: 'to-lime-600',
     typeColor: 'bg-lime-600',
   },
   fire: {
-    bgColor: 'to-amber-400',
     typeColor: 'bg-amber-400'
   },
   flying: {
-    bgColor: 'to-blue-400',
     typeColor: 'bg-blue-400',
   },
   water: {
-    bgColor: 'to-blue-300',
     typeColor: 'bg-blue-400',
   },
   bug: {
-    bgColor: 'to-neutral-500',
     typeColor: 'bg-neutral-500',
   },
   ground: {
-    bgColor: 'to-stone-500',
     typeColor: 'bg-stone-500',
   },
   electric: {
-    bgColor: 'to-amber-400', 
     typeColor: 'bg-amber-300',
   },
   fairy: {
-    bgColor: 'to-pink-300',
     typeColor: 'bg-pink-400',
   },
   fighting: {
-    bgColor: 'to-neutral-400',
     typeColor: 'bg-neutral-500',
   },
   psychic: {
-    bgColor: 'to-amber-300',
     typeColor: 'bg-amber-500',
   },
   rock: {
-    bgColor: 'to-stone-400',
     typeColor: 'bg-stone-600',
   },
   steel: {
-    bgColor: 'to-stone-400',
     typeColor: 'bg-stone-500',
   },
   ice: {
-    bgColor: 'to-blue-300',
     typeColor: 'bg-blue-300',
   },
   ghost: {
-    bgColor: 'to-gray-400',
     typeColor: 'bg-gray-400',
   },
   dragon: {
-    bgColor: 'to-orange-400',
     typeColor: 'bg-orange-400',
   },
   dark: {
-    bgColor: 'to-neutral-500',
-    typeColor: 'bg-neutral-800',
+    typeColor: 'bg-neutral-600',
   },
   unknow: {
-    bgColor: 'to-neutral-400',
     typeColor: 'bg-neutral-400',
   },
 };  // End of colorConfig
@@ -168,7 +149,7 @@ const widthConfig = {
             </div>
           </div> 
         
-      : <Spinner />
+      : <Error />
     }
     </>
   
