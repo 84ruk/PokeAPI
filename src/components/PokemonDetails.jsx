@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef } from 'react';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { toUpperCase } from '../helpers';
 import usePokemon from '../hooks/usePokemon';
 import { Error } from './Error';
@@ -22,8 +22,6 @@ export const PokemonDetails = () => {
 
   }, [name]); 
 
-
-/*   ${typesConfig[pokemon.types[0].type.name].bgColor} */
 
 const typesConfig = {
   // Colors
@@ -119,8 +117,6 @@ const widthConfig = {
 
 }
 
-/* ${widthConfig[numstat(stats.base_stat)]} */
- 
 
   return (
   
