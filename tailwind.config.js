@@ -1,7 +1,11 @@
 module.exports = {
   content: ['index.html', './src/**/*.jsx'],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'bg-image': 'url("./assets/PokeLogo.png")',
+      }
+    },
   },
   plugins: [],
 }
