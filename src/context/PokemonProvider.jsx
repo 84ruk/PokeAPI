@@ -82,7 +82,7 @@ const PokemonProvider = ({ children }) => {
     }
 
     const getMorePokemons = async () => {
-        
+
         if(paginaActual >= 20 && paginaActual <= 1120) {
             setHasMore(true);
             const resp = await axios
@@ -153,6 +153,7 @@ const PokemonProvider = ({ children }) => {
 
     const getPokemonByName = async (name) => {
 
+        setPokemon([]);
         try {
             const respname = await axios    // SE BUSCA EL POKEMON POR NOMBRE
             .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
@@ -181,29 +182,29 @@ const PokemonProvider = ({ children }) => {
     return (
         <PokemonContext.Provider
         value={{
-            handleInputChange,
-            setPokemon,
-            pokemon,
-            handleSubmit,
-            setPaginaActual,
-            paginaActual,
-            error,
-            setError,
             alerta,
-            setAlerta,
-            getInitialPokemons,
-            hasMore,
             cargando,
-            setHasMore,
+            error,
+            getInitialPokemons,
+            getPokemonByName,
             getPokemonByType,
+            handleInputChange,
+            hasMore,
+            handleClickName,
+            handleClickType,
+            handleSubmit,
+            paginaActual,
+            pokemon,
             searchParams,
+            setAlerta,
+            setCargando,
+            setError,
+            setHasMore,
+            setPaginaActual,
+            setPokemon,
             setSearchParams,
             name,
-            getPokemonByName,
-            setCargando,
-            handleClickType,
             numstat,
-            handleClickName,
         }}
         >
         {children}
