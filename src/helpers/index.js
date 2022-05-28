@@ -1,5 +1,6 @@
 
 export const toUpperCase = palabra => {
+<<<<<<< HEAD
     return palabra.charAt(0).toUpperCase() + palabra.slice(1);
 };
 
@@ -26,3 +27,10 @@ export function getActiveToken (input, cursorPosition) {
     ({ range }) => range[0] <= cursorPosition && range[1] >= cursorPosition
   )
 }
+=======
+    return palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
+};
+export const toLowerCase = palabra => {
+    return palabra.toUpperCase();
+};
+>>>>>>> 5c6e8c13e3476e2112a0b6044b53cb59b3fa09c7
