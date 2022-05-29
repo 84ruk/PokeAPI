@@ -149,7 +149,7 @@ const widthConfig = {
             </div>
           </div> 
         
-      : <Error />
+      : error ? <Error /> : <Spinner />}
     }
     </>
   

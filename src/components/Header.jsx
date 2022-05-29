@@ -98,7 +98,7 @@ const typesConfig = {
 
 
           </header>
-          <div className="flex justify-between items-center md:justify-center w-10/12 mx-auto md:py-14 mt-5 max-w-6xl  drop-shadow-2xl overflow-x-auto">
+          <div className="flex justify-between items-center md:justify-center w-10/12 mx-auto mt-5 max-w-6xl drop-shadow-2xl overflow-x-auto overscroll-x-none">
             {types ? types.map(type => {
                     return(
                         <button onClick={() => {handleClickType(type), setPokemon([])}} key={type} 
