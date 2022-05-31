@@ -14,7 +14,6 @@ const PokemonProvider = ({ children }) => {
     const [cargando, setCargando] = useState(true); //Anadir modal o componente que se mueste si es true
     const [paginaActual, setPaginaActual] = useState(0);
     const [hasMore, setHasMore] = useState(true);
-
     const [searchParams, setSearchParams] = useSearchParams({})
     const name = searchParams.get('name') ?? '';
     const navigate = useNavigate();
@@ -174,6 +173,26 @@ const PokemonProvider = ({ children }) => {
 
     }
 
+    const types = [
+        'normal',
+        'fighting',
+        'flying',
+        'poison',
+        'ground',
+        'rock',
+        'bug',
+        'ghost',
+        'steel',
+        'fire',
+        'water',
+        'grass',
+        'electric',
+        'psychic',
+        'ice',
+          
+      ]
+    
+
     useEffect(() => {
         getMorePokemons();
     }, [paginaActual]); 
@@ -203,6 +222,7 @@ const PokemonProvider = ({ children }) => {
             setPaginaActual,
             setPokemon,
             setSearchParams,
+            types,
             name,
             numstat,
         }}
