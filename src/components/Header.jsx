@@ -8,15 +8,8 @@ import Logo from '../assets/PokeLogo.png';
 
 export const Header = () => {
 
-  const { getTypes, setPokemon, types, handleClickType } = usePokemon();
+  const { setPokemon, types, handleClickType } = usePokemon();
   const location = useLocation();
-  
-
-  useEffect(() => {
-
-    getTypes();
-
-  }, []);
   
 
 const typesConfig = {
@@ -99,16 +92,15 @@ const typesConfig = {
 
               </header>
               <div className="flex justify-between items-center w-auto mx-auto sticky top-28 z-30 overflow-x-scroll bg-white max-w-screen-2xl xl:overflow-x-auto">
-                {types ? types.map(type => {
+                { types.map(type => {
                   return(
                     <button onClick={() => {handleClickType(type), setPokemon([])}} key={type} 
-                    className={`my-1 inline-block rounded-md px-2 py-1 text-sm font-semibold mr-2 hover:cursor-pointer hover:scale-110 ease-in duration-200 text-white bg-gray-500`}>
-                            
+                    className={`my-1 inline-block rounded-md px-3 py-1 text-sm font-semibold mr-2 hover:cursor-pointer hover:scale-110 ease-in duration-200 text-white ${typesConfig[type].typeColor}`}>
                                 {type}
                             </button>
                         )
                       }
-                      ) : <Spinner /> }
+                      )}
 
               </div>
                 

@@ -14,8 +14,6 @@ const PokemonProvider = ({ children }) => {
     const [cargando, setCargando] = useState(true); //Anadir modal o componente que se mueste si es true
     const [paginaActual, setPaginaActual] = useState(0);
     const [hasMore, setHasMore] = useState(true);
-    const [types, setTypes] = useState('');
-
     const [searchParams, setSearchParams] = useSearchParams({})
     const name = searchParams.get('name') ?? '';
     const navigate = useNavigate();
@@ -175,20 +173,25 @@ const PokemonProvider = ({ children }) => {
 
     }
 
-    const getTypes = async () => {
+    const types = [
+        'normal',
+        'fighting',
+        'flying',
+        'poison',
+        'ground',
+        'rock',
+        'bug',
+        'ghost',
+        'steel',
+        'fire',
+        'water',
+        'grass',
+        'electric',
+        'psychic',
+        'ice',
+          
+      ]
     
-        const resp = await axios
-        .get('https://pokeapi.co/api/v2/type')
-        .then((data) => {
-            return data.data.results;
-        })
-        .then((data) => {
-            return data.map((res) => res.name);
-        });
-        return setTypes(resp);
-
-    
-    }
 
     useEffect(() => {
         getMorePokemons();
@@ -204,7 +207,6 @@ const PokemonProvider = ({ children }) => {
             getInitialPokemons,
             getPokemonByName,
             getPokemonByType,
-            getTypes,
             handleInputChange,
             hasMore,
             handleClickName,
