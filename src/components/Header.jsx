@@ -3,6 +3,7 @@ import { Search } from "./Search";
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Spinner } from './Spinner';
+import Logo from '../assets/PokeLogo.png';
 
 
 export const Header = () => {
@@ -17,7 +18,6 @@ export const Header = () => {
 
   }, []);
   
-  console.log(types)
 
 const typesConfig = {
   // Colors
@@ -81,38 +81,39 @@ const typesConfig = {
 };  // End of colorConfig
 
   return (
-    <>
-        <header className="mt-5 h-28 flex-col w-full max-w-screen-2xl flex items-center md:flex-row justify-between px-11 mx-auto">
-          <Link to={location.pathname == '/' ? `null` :  `/`}>
-            <img 
-              src='../src/assets/PokeLogo.png'
-              className='h-10 object-contain cursor-pointer'
-              alt='logo'
-              onClick={() => 
-                location.pathname == '/' ? null :  setPokemon([])
-              }
+      <div className=' bg-white'>
+            <header className="mt-5 h-28 flex-col w-full max-w-screen-2xl flex items-center md:flex-row justify-between px-11 mx-auto sticky top-0 z-30 w-100 h-100 bg-white">
+              <Link to={location.pathname == '/' ? `null` :  `/`}>
+                <img 
+                  src={Logo}
+                  className='h-10 object-contain cursor-pointer'
+                  alt='logo'
+                  onClick={() => 
+                    location.pathname == '/' ? null :  setPokemon([])
+                  }
+                  
+                  />
+              </Link>
+                <Search />
 
-              />
-          </Link>
-            <Search />
 
+              </header>
+              <div className="flex justify-between items-center w-auto mx-auto sticky top-28 z-30 overflow-x-scroll bg-white max-w-screen-2xl xl:overflow-x-auto">
+                {types ? types.map(type => {
+                  return(
+                    <button onClick={() => {handleClickType(type), setPokemon([])}} key={type} 
+                    className={`my-1 inline-block rounded-md px-2 py-1 text-sm font-semibold mr-2 hover:cursor-pointer hover:scale-110 ease-in duration-200 text-white bg-gray-500`}>
+                            
+                                {type}
+                            </button>
+                        )
+                      }
+                      ) : <Spinner /> }
 
-          </header>
-          <div className="flex justify-between items-center md:justify-center w-10/12 mx-auto mt-5 max-w-6xl drop-shadow-2xl overflow-x-auto overscroll-x-none">
-            {types ? types.map(type => {
-                    return(
-                        <button onClick={() => {handleClickType(type), setPokemon([])}} key={type} 
-                        className={`w-24 my-1 inline-block rounded-md px-2 py-1 text-sm font-semibold mr-2 hover:cursor-pointer hover:scale-110 ease-in duration-200 text-white bg-gray-500`}>
-                        
-                            {type}
-                        </button>
-                    )
-                }
-                ) : <Spinner /> }
-
-          </div>
-            
-          <Outlet />
-    </>
+              </div>
+                
+              <Outlet />
+        </div>
+      
   )
 }

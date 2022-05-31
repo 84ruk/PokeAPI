@@ -30,7 +30,7 @@ export const Pokedex = () => {
           <Error />
           : 
           <>
-            <h1 className="text-3xl font-semibold text-center my-3 w-full overscroll-contain">Pokedex</h1>
+            <h1 className="text-3xl font-semibold text-center my-3 w-full overscroll-contain bg-white">Pokedex</h1>
             <InfiniteScroll
               dataLength={pokemon.length}
               hasMore={hasMore}
@@ -38,7 +38,7 @@ export const Pokedex = () => {
               next={ () => {
                 setPaginaActual(prevPag => prevPag + 20)
               } }
-              className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto overflow-hidden"
+              className="flex flex-wrap justify-center w-full px-10 max-w-screen-2xl mx-auto overflow-hidden bg-white"
             >
 
               {pokemon.map(pokemon => {

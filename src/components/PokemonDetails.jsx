@@ -150,8 +150,7 @@ const widthConfig = {
           </div> 
         
       : error ? <Error /> : <Spinner />}
-    }
     </>
-  
+
   )
 }
